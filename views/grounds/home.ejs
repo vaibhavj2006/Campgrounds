@@ -1,0 +1,24 @@
+<% layout('/layout/boilerplate') %>
+<h1>All Grounds</h1>
+<div>
+    <a href="/ground/new">Add Ground</a>
+</div>
+<% for (let grd of grounds){%>
+<div class="card" mb-3>
+    <div class="row">
+        <div class="col-md-4">
+            <img class="img-fluid" alt="" src="<%=grd.image%>">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title"><%= grd.location %> </h5>
+                <p class="card-text"><%=grd.description%></p>
+                <p class="card-text">
+                    <small class="text-muted"><%= grd.price %></small>
+                </p>
+                <a class="btn btn-primary" href="/ground/<%=grd._id%>">View <%=grd.title%></a>
+            </div>
+        </div>
+    </div>
+</div>
+<% }%>

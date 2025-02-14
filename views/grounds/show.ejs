@@ -1,0 +1,44 @@
+<% layout('/layout/boilerplate') %>
+<div class="row">
+    <div class="col-6 ">
+        <div class="card mb-3">
+            <img src="<%= grounds.image%>" class="card-img-top card-body" alt="...">
+            <div class="card-body">
+                <h5 class="card-title"><%= grounds.location%></h5>
+                <p class="card-text"><%= grounds.description%></p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item text-muted"><%= grounds.location%></li>
+                <li class="list-group-item">$<%= grounds.price%>/night</li>
+            </ul>
+            <div class="card-body">
+                <a class="card-link btn btn-info" href="/ground/<%=grounds._id%>/edit">Edit</a>
+                <form class="d-inline" action="/ground/<%=grounds._id%>?_method=DELETE" method="POST">
+                    <button class="btn btn-danger">Delete</button>
+        
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+    </form>
+
+    <h3>Review</h3>
+
+<form action="/ground/<%=grounds._id%>/review" method="POST" class="mb-3 validated-form" novalidate>
+    <input type="text" class="form-control" id="review" 
+    aria-describedby="review-label" name="review[body]" required>
+    <button>submit</button>
+</form>
+
+<%for(let rev of grounds.review){ %>
+      <div>
+        Review-<%=rev.body%>
+                <form class="d-inline" action="/ground/<%=grounds._id%>/review/<%=rev._id%>?_method=DELETE" method="POST">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+
+
+      </div>
+<%}%>
+</div>
+</div>
