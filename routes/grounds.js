@@ -1,9 +1,11 @@
-const express=require('express');
-const router=express.Router();
-const wrapAsync=require('../utils/wrapAsync');
-const ExpressError=require('../utils/errors');
-const ground=require('../model/grounds');
-const {errSchema}=require('../errorSchema.js');
+const express = require('express');
+const router = express.Router();
+const wrapAsync = require('../utils/wrapAsync');
+const control = require('../controller/grounds');
+const multer=require('multer')
+const {storage}=require('../cloud');
+const upload=multer({storage});
+
 
 const validater=(req,res,next)=>{
     
@@ -16,44 +18,21 @@ const validater=(req,res,next)=>{
     }
 }
 
-router.get('/',async (req,res)=>{
-    const grounds=await ground.find({});
-    res.render('grounds/home',{grounds})
-})
+
+router.get('/', wrapAsync(control.index));
 
 
-router.get('/new',async(req,res)=>{
-    res.render('grounds/create')
-})
+router.post('/',upload.array('image'),wrapAsync(control.createground));
 
+router.get('/new', control.renderground);
 
-router.post('/',validater, wrapAsync(async(req,res,next)=>{
-    const newground=new ground(req.body.ground)
-    await newground.save();
-    res.redirect(`/ground/${newground._id}`)
-}))
+router.get('/:id', wrapAsync(control.rendershow));
 
-router.get('/:id',async(req,res)=>{
-    const grounds=await ground.findById(req.params.id).populate('review');
-    res.render('grounds/show',{grounds})
-})
+router.put('/:id', wrapAsync(control.update));
 
-router.get('/:id/edit',validater,wrapAsync(async(req,res)=>{
-    const grounds=await ground.findById(req.params.id);
-    res.render('grounds/edit',{grounds})
-}))
+router.delete('/:id', wrapAsync(control.delete));
 
-router.put('/:id',validater,wrapAsync(async(req,res)=>{
-    const { id }=req.params;
-    const newground=await ground.findByIdAndUpdate(id,{...req.body.ground})
-    res.redirect(`/ground/${newground._id}`)
-}))
+router.get('/:id/edit', wrapAsync(control.edit));
 
-router.delete('/:id',async(req,res)=>{
-    const { id }=req.params;
-    const grounds=await ground.findByIdAndDelete(req.params.id);
-    res.redirect('/ground')
-})
-
-module.exports=router;
+module.exports = router;
 

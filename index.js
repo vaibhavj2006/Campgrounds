@@ -1,3 +1,7 @@
+if(process.env.NODE_ENV !== "production"){
+     require('dotenv').config();
+}
+
 const express=require('express');
 const mongoose=require('mongoose');
 const path=require('path');
@@ -10,6 +14,7 @@ const { title } = require('process');
 const ExpressError=require('./utils/errors');
 const {errSchema}=require('./errorSchema.js');
 const review=require('./model/review');
+
 
 
 //routes

@@ -1,13 +1,20 @@
 const mongoose=require('mongoose');
 const Schema=mongoose.Schema;
-const review=require('./review')
+const review=require('./review');
+const { string } = require('joi');
 
 const groundSchema=new Schema({
     title:String,
-    image:String,
+     image:{ type: String },
+    //  [
+    //     {
+    //         url:String,
+    //         filename:String
+    //     }
+    // ],
     description:String,
     location:String,
-    price:Number,
+    price:String,
     review: [
         {
             type:Schema.Types.ObjectId,
