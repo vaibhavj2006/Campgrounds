@@ -14,15 +14,25 @@ const { title } = require('process');
 const ExpressError=require('./utils/errors');
 const {errSchema}=require('./errorSchema.js');
 const review=require('./model/review');
-
-
+const session=require('express-session')
+const passport=require('passport')
+const passportlocal=require('passport-local');
+const user=require('./model/user')
+const passportLocalMongoose=require('passport-local-mongoose');
 
 //routes
 const grounds=require('./routes/grounds')
 const reviews=require('./routes/review')
+const users=require('./routes/users')
 
 
 const app=express();
+const sessioncofig={
+    secret:'sui',
+    resave:false,
+    saveUninitialized: true
+    
+}
 
 mongoose.connect('mongodb://127.0.0.1:27017/ground')
 
@@ -35,6 +45,7 @@ db.once("open",()=>{
 
 app.set('view engine', 'ejs');
 app.set('views',path.join(__dirname,'views'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.engine('ejs',ejsMate)
 
@@ -43,9 +54,21 @@ app.use(methodover('_method'))
 app.use(express.static('public'))
 
 
-//routes
+app.use(session(sessioncofig))
+
+app.use(passport.initialize())
+app.use(passport.session())
+
+passport.use(new passportlocal(user.authenticate()))
+
+
+passport.serializeUser(user.serializeUser())
+passport.deserializeUser(user.deserializeUser());
+
+app.use('/',users)
 app.use('/ground',grounds)
 app.use('/ground/:id/review',reviews)
+
 
 
 app.listen(8080,()=>{
@@ -58,7 +81,9 @@ app.all(/(.*)/, (req, res, next) => {
 
 app.use((err,req,res,next)=>{
     const {statusCode= 500 }=err;
-    if(!err.message) err.message='oh no, Something went wrong'
+    if(!err.message) err.message='oh noo, Something went wrong'
     res.status(statusCode).render('error',{ err })
 })
+
+
 

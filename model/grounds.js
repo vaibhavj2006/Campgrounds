@@ -5,7 +5,7 @@ const { string } = require('joi');
 
 const groundSchema=new Schema({
     title:String,
-     image:{ type: String },
+     image:{ type: [String] },
     //  [
     //     {
     //         url:String,
@@ -15,12 +15,11 @@ const groundSchema=new Schema({
     description:String,
     location:String,
     price:String,
-    review: [
-        {
-            type:Schema.Types.ObjectId,
-            ref:'Review'
-        }
-    ]
+   
+    review: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Review'
+    }],
 });
 
 

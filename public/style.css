@@ -1,0 +1,175 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  background: linear-gradient(135deg, #f9f9f9, #e0e0e0);
+  color: #333;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Container for the form */
+.row {
+  max-width: 800px;
+  width: 100%;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Heading */
+h1.text-center {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+h1.text-center::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: #3498db;
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Form Labels */
+.form-label {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 5px;
+}
+
+/* Form Inputs */
+.form-control {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+}
+
+/* Input Group for Price */
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.input-group-text {
+  background-color: #ecf0f1;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  color: #333;
+  font-weight: bold;
+}
+
+.input-group .form-control {
+  border-radius: 0 8px 8px 0;
+}
+
+/* Textarea Styling */
+textarea.form-control {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Button Styling */
+.btn {
+  padding: 12px 24px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  background: #3498db;
+  color: #fff;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Link Styling */
+a {
+  display: inline-block;
+  margin-top: 15px;
+  color: #3498db;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #2980b9;
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .row {
+      padding: 20px;
+  }
+
+  h1.text-center {
+      font-size: 2rem;
+  }
+
+  .form-label {
+      font-size: 1rem;
+  }
+
+  .form-control {
+      font-size: 0.9rem;
+  }
+
+  .btn {
+      font-size: 0.9rem;
+  }
+}

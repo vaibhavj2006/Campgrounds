@@ -24,11 +24,14 @@ router.get('/', wrapAsync(control.index));
 
 router.post('/',upload.array('image'),wrapAsync(control.createground));
 
+router.get('/home',control.home)
+
 router.get('/new', control.renderground);
+router.put('/:id', wrapAsync(control.update));
 
 router.get('/:id', wrapAsync(control.rendershow));
 
-router.put('/:id', wrapAsync(control.update));
+
 
 router.delete('/:id', wrapAsync(control.delete));
 

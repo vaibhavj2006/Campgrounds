@@ -1,0 +1,94 @@
+<% layout('/layout/boilerplate') %>
+
+<div class="row">
+    <h1 class="text-center">New Campground</h1>
+    <div class="col-6 offset-3">
+        <form action="/ground" method="POST" novalidate clss="validate-form" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label" for="title">Title</label>
+                <input class="form-control" type="text" id="title" name="ground[title]">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="location">Location</label>
+                <input class="form-control" type="text" id="location" name="ground[location]">
+            </div>
+
+            <input type="file" name="image" id="" multiple>
+            <!-- <div class="mb-3">
+                <label class="form-label" for="image">Image Url</label>
+                <input class="form-control" type="text" id="image" name="ground[image]">
+            </div> -->
+            <div class="mb-3">
+                <label class="form-label" for="price">Campground Price</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="price-label">$</span>
+                    <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price"
+                        aria-describedby="price-label" name="ground[price]">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="description">Description</label>
+                <textarea class="form-control" type="text" id="description" name="ground[description]"></textarea>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-success">Add Campground</button>
+            </div>
+        </form>
+        <a href="/ground">All grounds</a>
+    </div>
+</div>
+
+
+
+
+<% layout('/layout/boilerplate') %>
+
+  <div class="wrapper">
+    <form action="/ground" method="POST" novalidate clss="validate-form" enctype="multipart/form-data">
+      <h2>Add</h2>
+
+
+
+        <div class="input-field">
+        <<label for="title" required>Title</label>
+        <input type="text" id="title" name="ground[title]">
+      </div>
+
+
+
+      <div class="input-field">
+        <label for="location" required>Location</label>
+                <input type="text" id="location" name="ground[location]">
+      </div>
+
+
+      
+      <div class="input-field">
+        <label class="form-label" for="price" required>Campground Price</label>
+                    <span id="price-label">$</span>
+                    <input type="text" id="price" aria-label="price"
+                        aria-describedby="price-label" name="ground[price]">
+      </div>
+
+
+      <div class="input-field">
+        <label class="form-label" for="image" required>Image Url</label>
+                <input type="text" id="image" name="ground[image]">
+      </div>
+
+
+      <div class="input-field">
+        <label class="form-label" for="description" required>Description</label>
+        <textarea type="text" id="description" name="ground[description]"></textarea>
+      </div>
+
+
+      <button type="submit">Add</button>
+    
+
+    </form>
+
+
+
+  </div>
