@@ -17,10 +17,10 @@ db.on("error", console.error.bind(console, "connection error:"));
 db.once("open",()=>{
     console.log("dtabase connected");
 });
-
+1
 
 const seedDB=async()=>{
-            await ground.deleteMany({});
+           // await ground.deleteMany({});
 
             const browser = await puppeteer.launch();
             const page = await browser.newPage();

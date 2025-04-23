@@ -4,6 +4,13 @@ const ground=require('../model/grounds');
 const Sentiment = require('sentiment');
 const sentiment = new Sentiment();
 
+const auth=(req,res,next)=>{
+  if(!req.isAuthenticated()){
+      req.flash('error',"you must signed in!")
+       return res.redirect('/login')
+  }
+  next();
+}
 
 
 module.exports.home = async(req, res) => {
@@ -59,7 +66,7 @@ module.exports.createground = async (req, res, next) => {
     res.redirect(`/ground/${newground._id}`);  
 };
 
-module.exports.rendershow = async (req, res) => {
+module.exports.rendershow = auth,async (req, res,next) => {
     const grounds = await ground.findById(req.params.id).populate('review');
     
     res.render('grounds/show', { grounds });
